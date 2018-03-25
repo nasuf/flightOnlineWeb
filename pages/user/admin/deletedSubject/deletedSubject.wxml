@@ -1,0 +1,76 @@
+<view class="weui-panel">
+    <view class="weui-panel__hd" bindtap="toggleTicketModule">☰ 机票信息</view>
+    <view class="weui-panel__bd" wx:if="{{tickets.length > 0 && ticketModuleDisplay}}">
+        <view class="weui-media-box weui-media-box_small-appmsg">
+            <view class="weui-cells weui-cells_in-small-appmsg">
+                <view class="weui-cell weui-cell_switch" wx:for="{{tickets}}" wx:for-item="ticket">
+                    <view bindtap="openActionSheet" data-id="{{ticket.id}}" data-subject="ticket" class="weui-cell__bd" style="font-size: 15px">{{'【' + ticket.title + '】'}}</view>
+                </view>
+                <view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                    <view class="weui-cell__bd weui-cell_primary">
+                        <view style="font-size: 12px; color: #5a7590" data-isloadmoretap="true" bindtap='loadTickets'>
+                            查看更多
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="weui-panel">
+    <view class="weui-panel__hd" bindtap="toggleTourismModule">☰ 出行结伴</view>
+    <view class="weui-panel__bd" wx:if="{{tourisms.length > 0 && tourismModuleDisplay}}">
+        <view class="weui-media-box weui-media-box_small-appmsg">
+            <view class="weui-cells weui-cells_in-small-appmsg">
+                <view class="weui-cell weui-cell_switch" wx:for="{{tourisms}}" wx:for-item="tourism">
+                    <view bindtap="openActionSheet" data-id="{{tourism.id}}" data-subject="tourism" class="weui-cell__bd" style="font-size: 15px">{{tourism.posterNickName + ' 发表的：【' + tourism.title + '】'}}</view>
+                </view>
+                <view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                    <view class="weui-cell__bd weui-cell_primary">
+                        <view style="font-size: 12px; color: #5a7590" data-isloadmoretap="true" bindtap='loadTourisms'>
+                            查看更多
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="weui-panel">
+    <view class="weui-panel__hd" bindtap="toggleQuestionModule">☰ 提问</view>
+    <view class="weui-panel__bd" wx:if="{{questions.length > 0 && questionModuleDisplay}}">
+        <view class="weui-media-box weui-media-box_small-appmsg">
+            <view class="weui-cells weui-cells_in-small-appmsg">
+                <view class="weui-cell weui-cell_switch" wx:for="{{questions}}" wx:for-item="question">
+                    <view bindtap="openActionSheet" data-id="{{question.id}}" data-subject="question" class="weui-cell__bd" style="font-size: 15px">{{question.posterNickName + ' 发表的：【' + question.title + '】'}}</view>
+                </view>
+                <view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                    <view class="weui-cell__bd weui-cell_primary">
+                        <view style="font-size: 12px; color: #5a7590" data-isloadmoretap="true" bindtap='loadQuestions'>
+                            查看更多
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="weui-panel">
+    <view class="weui-panel__hd" bindtap="toggleCustomModule">☰ 独享服务</view>
+    <view class="weui-panel__bd" wx:if="{{customs.length > 0 && customModuleDisplay}}">
+        <view class="weui-media-box weui-media-box_small-appmsg">
+            <view class="weui-cells weui-cells_in-small-appmsg">
+                <view class="weui-cell weui-cell_switch" wx:for="{{customs}}" wx:for-item="custom">
+                    <view bindtap="openActionSheet" data-id="{{custom.id}}" data-subject="custom" class="weui-cell__bd" style="font-size: 15px">{{'【' + custom.title + '】'}}</view>
+                </view>
+                <view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                    <view class="weui-cell__bd weui-cell_primary">
+                        <view style="font-size: 12px; color: #5a7590" data-isloadmoretap="true" bindtap='loadCustoms'>
+                            查看更多
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

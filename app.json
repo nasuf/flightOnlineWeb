@@ -1,0 +1,59 @@
+{
+    "pages": [
+        "pages/index/index",
+        "pages/user/index/index",
+        "pages/logs/logs",
+        "pages/adminLogin/adminLogin",
+        "pages/ticket/ticket/ticket",
+        "pages/ticket/publish/publish",
+        "pages/ticket/ticketDetail/ticketDetail",
+        "pages/ticket/oldMember/oldMember",
+        "pages/ticket/qr/qr",
+        "pages/comment/comment",
+        "pages/tourism/tourism/tourism",
+        "pages/tourism/publish/publish",
+        "pages/tourism/tourismDetail/tourismDetail",
+        "pages/tourism/signUp/signUp",
+        "pages/question/question/question",
+        "pages/question/raiseQues/raiseQues",
+        "pages/question/questionDetail/questionDetail",
+        "pages/custom/custom/custom",
+        "pages/custom/publish/publish",
+        "pages/custom/customDetail/customDetail",
+        "pages/user/admin/password/password",
+        "pages/user/admin/permission/permission",
+        "pages/custom/signUp/signUp",
+        "pages/user/admin/deletedSubject/deletedSubject",
+        "pages/user/admin/deletedMessage/deletedMessage",
+        "pages/user/msg/msg",
+        "pages/user/privMsg/privMsg",
+        "pages/user/admin/announcement/announcement",
+        "pages/user/admin/privMsg/privMsg",
+        "pages/user/admin/customSignUpMessage/customSignUpMessage"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "WeChat",
+        "navigationBarTextStyle": "black",
+        "enablePullDownRefresh": false
+    },
+    "tabBar": {
+        "list": [
+            {
+                "pagePath": "pages/index/index",
+                "position": "top",
+                "text": "首页",
+                "iconPath": "images/home-72.png",
+                "selectedIconPath": "images/home-72-selected.png"
+            },
+            {
+                "pagePath": "pages/user/index/index",
+                "position": "top",
+                "text": "个人中心",
+                "iconPath": "images/user-72.png",
+                "selectedIconPath": "images/user-72-selected.png"
+            }
+        ]
+    }
+}

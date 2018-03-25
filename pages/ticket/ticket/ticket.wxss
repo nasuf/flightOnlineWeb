@@ -1,0 +1,115 @@
+/* pages/ticket/ticket.wxss */
+
+.container {
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+
+.weui-btn.publish-btn {
+    height: 35px;
+    width: 70px;
+    font-size: 15px;
+    display: flex;
+    flex-direction: row;
+    /* align-items: left; */
+    justify-content: center;
+    align-items: center;
+    border-color: white !important;
+    background-color: white !important;
+    color: black !important;
+}
+
+.weui-btn.publish-btn:active {
+    color: gray !important;
+}
+
+.weui-btn.join-btn {
+    height: 35px;
+    width: 80px;
+    font-size: 12px;
+    display: flex;
+    flex-direction: row;
+    /* align-items: left; */
+    justify-content: center;
+    align-items: center;
+    border-color: orange !important;
+    background-color: orange !important;
+    color: white !important;
+}
+
+.weui-btn.join-btn:active {
+    color: gray !important;
+}
+
+.weui-btn.old-member-btn {
+    height: 35px;
+    width: 100px;
+    font-size: 12px;
+    display: flex;
+    flex-direction: row;
+    /* align-items: left; */
+    justify-content: center;
+    align-items: center;
+    border-color: white !important;
+    background-color: white !important;
+    color: black !important;
+}
+
+.weui-btn.old-member-btn:active {
+    color: gray !important;
+}
+
+.head {
+    display: flex;
+    flex-direction: row;
+    /* align-items: left; */
+    justify-content: space-between; /*主轴上对齐方式 flex-start(左对齐) flex-end(右对齐) center(居中)  space-around(均衡排布) space-between(均衡排布 两端对齐)*/
+    align-items: center; /*交叉轴对齐方式 flex-start flex-start center stretch baseline(元素内的第一行文字对齐 )*/
+    margin-right: 50px;
+}
+
+/* .weui-panel__bd {
+    border: 0px solid !important
+} */
+
+.text {
+    display: -webkit-box !important;
+    word-break: normal !important;
+    text-overflow: ellipsis !important;
+    overflow: hidden !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-line-clamp: 4 !important;
+    line-height: 20px
+}
+
+.image-pen {
+    position: fixed;
+    bottom: 90px;
+    right: 50px;
+    background: #b4d145;
+    opacity: 0.7;
+}
+
+
+/* .card {
+    width: 95%;
+    margin: 0px auto;
+    margin-bottom: 20rpx;
+    background-color: white;
+    box-shadow: 0px 5px 20px #999;
+} */
+
+/* .card a {
+    color:#333;
+    text-decoration:none;
+} */
+
+/* .card:hover {
+    width: 98%;
+    filter: grayscale(0);
+} */

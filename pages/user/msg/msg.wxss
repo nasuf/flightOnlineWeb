@@ -1,0 +1,51 @@
+Page {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.msg {
+    border-color: white !important;
+    background-color: white !important;
+    border: 0px solid !important;
+    width: 85%;
+    margin-bottom: 0 !important
+}
+
+.title {
+    font-size: 14px;
+    font-weight: bold;
+    color: gray
+}
+
+.copy-btn {
+    width: 90%;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.tips {
+    text-align: left;
+    font-size: 11px;
+    width: 80%;
+    color: gray !important;
+    align-self: flex-start;
+    margin-left: 10%;
+}
+
+.info {
+    height: 80%;
+    font-size: 13px;
+    color: gray;
+    line-height: 5px !important;
+    word-break:break-all;
+}

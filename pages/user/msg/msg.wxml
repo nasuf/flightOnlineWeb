@@ -1,0 +1,38 @@
+<view class="weui-media-box weui-media-box_text msg" style="margin: 35px;" wx:if="{{subject == 'TOURISM_SENT' || subject == 'TOURISM_RECEIVED'}}">
+    <view>
+        <view class="weui-cell__bd title">{{msg.type=='SENT'?('发送给 ' + msg.receiverNickName + ' 的私信【' + msg.tourismTitle + '】') : ('收到 ' + msg.sentorNickName + ' ( 微信号：' + msg.wechatId + ' )的私信【' + msg.tourismTitle + '】:')}}</view>
+        <text class="info" decode="{{true}}">
+        {{msg.previousMsg}}
+        </text>
+    </view>
+</view>
+<view class="weui-media-box weui-media-box_text msg" style="margin: 35px;" wx:if="{{subject == 'PRIVADMIN_SENT'}}">
+    <view>
+        <view class="weui-cell__bd title">{{'【' + msg.type + '】'}}</view>
+        <text class="info" decode="{{true}}">
+        {{msg.previousMsg}}
+        </text>
+    </view>
+</view>
+<view class="weui-media-box weui-media-box_text msg" style="margin: 35px;" wx:if="{{subject == 'CUSTOM_SIGNUP_MSG'}}">
+    <view>
+        <view class="weui-cell__bd title">{{ msg.nickName + ' ( 微信号：'+msg.wechatId+' ) 报名参加【' + msg.title + '】：'}}</view>
+        <text class="info" decode="{{true}}">
+        {{'人数：' + msg.count + '\n时间：' + msg.departureDate + '\n项目：' + msg.item + '\n报名时间：' + msg.signUpDate + '\n详情：' + msg.previousContent}}
+        </text>
+    </view>
+</view>
+<view class="tips" wx:if="{{msg.type == 'RECEIVED'}}">
+    <text>
+        【提示】小程序不支持即时聊天，如需进一步沟通，请自行与对方微信联系
+    </text>
+</view>
+<view class="weui-media-box weui-media-box_text msg" style="margin: 35px;" wx:if="{{subject == 'PRIVADMIN_RECEIVED'}}">
+    <view>
+        <view class="weui-cell__bd title">{{'【' + msg.type + '】'+ msg.posterNickName+' 于 ' + msg.postDate + ' 对你说：'}}</view>
+        <text class="info" decode="{{true}}">
+        {{msg.previousContent}}
+        </text>
+    </view>
+</view>
+<button wx:if="{{subject == 'TOURISM_RECEIVED' || subject == 'PRIVADMIN_RECEIVED' || subject == 'CUSTOM_SIGNUP_MSG'}}" class="weui-btn copy-btn" style="width: 80%; margin-top: 30%" type="primary" bindtap="copy">{{(subject == 'TOURISM_RECEIVED' || subject == 'CUSTOM_SIGNUP_MSG')? '复制报名者微信号' : '复制发信人微信号'}}</button>

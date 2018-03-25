@@ -1,0 +1,101 @@
+<view class="weui-panel">
+    <view class="weui-panel__bd" wx:if="{{isTourismLoaded}}">
+        <view class="weui-media-box weui-media-box_text ticket-detail">
+            <view class="weui-media-box__desc" style="margin-bottom: 15px">
+                <view class="topic-avatar-nickname">
+                    <image class="topic-avatar" src="{{tourism.posterAvatarUrl}}" background-size="cover"></image>
+                        <view class="topic-info">
+                            {{tourism.posterNickName + ' 发表于 ' + tourism.formatedPostDate}}
+                        </view>
+                </view>
+            </view>
+            <view class="title-signUpBtn">
+                <view style='font-size:17px;word-wrap:break-word;overflow:hidden;width:75%'>
+                    {{tourism.title}}
+                </view>
+                <view style="width:25%">
+                    <button class="weui-btn signUpBtn" data-tourismid="{{tourism.id}}" plain="true" bindtap="onSignUpClick" disabled='{{isSignUp}}'>{{isSignUp ? '已报名' : '报名'}}</button>
+                </view>
+            </view>
+
+            <view class="weui-media-box__desc" >
+                <text class="location" decode="{{true}}" selectable='true'>
+                    {{'行程：' + tourism.departureLocation + ' ➝ ' + tourism.arrivalLocation}}
+                </text>
+                <text class="contact" decode="{{true}}">
+                    {{'出发时间：' + tourism.departureDate}}
+                </text>
+                <text class="contact" decode="{{true}}" selectable='true'>
+                    {{'联系方式：' + tourism.contact + '（微信）'}}
+                </text>
+                <text class="topic-cnt" decode="{{true}}">
+                    {{'出行人数：' + tourism.participantCnt + '&nbsp;&nbsp;&nbsp;&nbsp;报名人数：' + (tourism.signUpSet ? tourism.signUpSet.length : 0)}}
+                </text>
+            </view>
+            <text class="topic-content" decode="{{true}}" selectable='true'>
+                        {{tourism.content == null ? '' : tourism.content}}
+                        </text>
+            <view class="weui-media-box__info tourism-action">
+                <view class="action">
+                    <view class="weui-media-box__info__meta weui-media-box__info__meta_extra topic-comment" data-id="{{tourism.id}}" data-subject="TOURISM" data-msgtype="TOPIC" bindtap="onCommentAction">评论</view>
+                    <view class="weui-media-box__info__meta weui-media-box__info__meta_extra" wx:if="{{role == 'ADMIN' || openid == tourism.poster}}" data-subject="TOURISM" data-msgtype="TOPIC" bindtap="onDeleteAction" data-id="{{tourism.id}}">删除</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+
+<view class="weui-panel" wx:if="{{isRepliesLoaded}}">
+    <view wx:for="{{replies}}" wx:for-item="reply">
+        <view class="weui-panel__bd reply-panel">
+            <view class="reply-field weui-media-box weui-media-box_text">
+                <view class="avatar">
+                    <image bindtap="openActionSheet" class="avatar" src="{{reply.replyMessage.posterAvatarUrl}}" background-size="cover"></image>
+                </view>
+                <view class="reply-content">
+                    <view class="nickname-floor">
+                        <text class="nickname">{{reply.replyMessage.posterNickName}}</text>
+                        <text class="floor">{{'# ' + (index+1)}}</text>
+                    </view>
+                    <view class="weui-media-box__desc beRepliedContent">
+                        <text class="beReplied" wx:if="{{reply.replyMessage.beRepliedPoster}}" decode="{{true}}">
+                            {{reply.replyMessage.beRepliedPoster}} &nbsp;&nbsp;发表于:&nbsp;{{reply.replyMessage.beRepliedPostDate}} \n {{reply.repliedContent}}
+                        </text>
+                    </view>
+                    <view class="weui-media-box__desc content">
+                        <text class="desc" decode="{{true}}" maxlength='-1' selectable='true'>
+                            {{reply.replyMessage.content}}
+                        </text>
+                    </view>
+                    <view class="replypostdate-action">
+                        <view class="replypostdate">
+                            {{reply.replyMessage.formatedPostDate}}
+                        </view>
+                        <view class="action weui-media-box__info">
+                            <view class="weui-media-box__info__meta weui-media-box__info__meta_extra action-comment" style="{{reply.replyMessage.commentStyle}}" data-id="{{reply.replyMessage.id}}" data-subject="TOURISM" data-msgtype="REPLY" data-content="{{reply.replyMessage.content}}" data-berepliedposter="{{reply.replyMessage.poster}}"
+                                data-postdate="{{reply.replyMessage.postDate}}" data-posternickname="{{reply.replyMessage.posterNickName}}" bindtap="onCommentAction">评论</view>
+                            <view class="weui-media-box__info__meta weui-media-box__info__meta_extra action-delete" wx:if="{{role == 'ADMIN' || openid == reply.replyMessage.poster}}" bindtap="onDeleteAction" data-subject="TOURISM" data-msgtype="REPLY" data-id="{{reply.replyMessage.id}}">删除</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<!-- <view class="weui-panel">
+    <view class="weui-panel__bd">
+        <view class="weui-panel__hd">评论</view>
+        <view wx:for="{{replies}}" wx:for-item="reply">
+            <view class="weui-media-box weui-media-box_text">
+                <view class="weui-media-box__desc">
+                    <text class="desc" decode="{{true}}">
+                    {{reply.content}} 
+                </text>
+                </view>
+                <view class="weui-media-box__info">
+                    <view class="weui-media-box__info__meta weui-media-box__info__meta_extra" data-id="{{reply.id}}" bindtap="onComment">评论</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view> -->

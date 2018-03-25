@@ -1,0 +1,19 @@
+/**app.wxss**/
+@import 'weui.wxss';
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+} 
+
+ page {
+  background-color: #F5F5F5;
+} 
+
+/* page {
+  background: url("http://pic.qiantucdn.com/58pic/17/19/89/97H58PICP8s_1024.jpg") no-repeat;
+} */

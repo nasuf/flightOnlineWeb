@@ -1,0 +1,29 @@
+<scroll-view scroll-y style="height: 90%" bindscrolltolower="onReachBottom">
+    <view class="weui-panel">
+        <view wx:for="{{tourisms}}" wx:for-item="tourism">
+            <!-- <view class="weui-panel__hd"></view> -->
+            <view hover-class="weui-cell_active" class="weui-panel__bd" style="{{style}}" wx:if="{{tourism.isDeleted != true}}" bindtap="onCheckDetail" data-tourismid="{{tourism.id}}">
+
+                <view class="tourism-item weui-media-box weui-media-box_text">
+                    <view class="topic-avatar-nickname">
+                        <image class="topic-avatar" src="{{tourism.posterAvatarUrl}}" background-size="cover"></image>
+                        <view class="topic-info">
+                            {{tourism.posterNickName + ' 发表于 ' + tourism.postDate}}
+                        </view>
+                    </view>
+                    <view class="title-signUpBtn">
+                        <view style='font-size:17px;word-wrap:break-word;overflow:hidden'>
+                            {{tourism.title}}
+                        </view>
+                    </view>
+
+                    <view class="weui-media-box__info">
+                        <view class="weui-media-box__info__meta">出行时间：{{tourism.departureDate}}</view>
+                        <view class="weui-media-box__info__meta">结伴人数：{{tourism.participantCnt}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</scroll-view>
+<button class="weui-btn publish-btn" plain="true" bindtap="publishTap">我要发布旅程</button>

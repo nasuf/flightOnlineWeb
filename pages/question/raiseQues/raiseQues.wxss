@@ -1,0 +1,10 @@
+page{
+    background-color: #FFFFFF;
+    height: 100%
+}
+
+
+
+.content, .weui-input, .weui-msg__title {
+    text-align: left;
+}

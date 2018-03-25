@@ -1,0 +1,365 @@
+<view class="userinfo">
+    <view wx:if="{{!authorized}}"  open-type="getUserInfo" bindgetuserinfo="userInfoHandler"><image class="userinfo-avatar" src="../../../images/un_authorized.png" background-size="cover"></image></view>
+    <block wx:else>
+        <image bindtap="openActionSheet" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+    </block>
+    <view>
+        <button class="authorize-btn" wx:if="{{!authorized}}" open-type="getUserInfo" bindgetuserinfo="userInfoHandler">点击授权</button>
+        <text wx:if="{{authorized}}" class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </view>
+    <view wx:if="{{authorized}}" >
+        <block wx:if="{{role == 'ADMIN'}}">
+            <text wx:if="{{adminLoginStatus == true}}" class="admin-logon">管理员已登录</text>
+            <block wx:else>
+                <text class="admin-logout">管理员离线</text>
+            </block>
+        </block>
+        <block wx:if="{{role == 'USER'}}">
+            <text class="user">普通用户</text>
+        </block>
+        <block wx:else>
+            <text wx:if="{{role == 'VIP'}}" class="vip">会员</text>
+        </block>
+    </view>
+    <!-- <button class="weui-btn priv-btn" wx:if="{{role != 'ADMIN' && authorized == true}}" plain="true" bindtap="sendPrivMsgBtn">私信给管理员</button> -->
+</view>
+<!-- ******************************************* -->
+<view class="top-btn-view">
+    <button class="weui-btn type-btn" style="{{topicBtnStyle}}" plain="true" data-type="TOPIC" bindtap="onModuleTap">发帖</button>
+    <button class="weui-btn type-btn" style="{{commentBtnStyle}}" plain="true" data-type="COMMENT" bindtap="onModuleTap">评论</button>
+    <!-- <button class="weui-btn type-btn" style="{{storeBtnStyle}}" plain="true" data-type="STORE" bindtap="onModuleTap">收藏</button> -->
+    <button class="weui-btn type-btn" style="{{privateMsgBtnStyle}}" plain="true" data-type="PRIVATEMSG" bindtap="onModuleTap">私信</button>
+    <button wx:if="{{role == 'ADMIN'}}" class="weui-btn type-btn" style="{{adminBtnStyle}}" plain="true" data-type="ADMIN" bindtap="onModuleTap">管理员</button>
+</view>
+<!-- *******************TOPIC MODULE************************ -->
+<view class="topic-view" wx:if="{{topicDisplay}}">
+    <view class="weui-panel" wx:if="{{role == 'ADMIN'}}">
+        <view class="weui-panel__hd" bindtap="toggleTicketModule">☰ 机票信息</view>
+        <view class="weui-panel__bd" wx:if="{{tickets.length > 0 && ticketsDisplay}}">
+            <view class="weui-media-box weui-media-box_small-appmsg">
+                <view class="weui-cells weui-cells_in-small-appmsg">
+                    <view wx:for="{{tickets}}" wx:for-item="ticket">
+                        <navigator url="../../ticket/ticketDetail/ticketDetail?ticketId={{ticket.id}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                            <view class="weui-cell__bd weui-cell_primary">
+                                <view style="{{ticket.isDeleted ? 'color: gray !important;font-size: 13px;' : 'font-size: 13px;'}}">
+                                    {{ticket.title + (ticket.isDeleted?'【已删除】':'')}}
+                                </view>
+                                <view style="color: gray !important; font-size: 11px !important">{{'发布于：' + ticket.publishDate + ' 收到回复：' + (ticket.replyCnt == null?'0':ticket.replyCnt) + '条'}}</view>
+                            </view>
+                            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                        </navigator>
+                    </view>
+                    <view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                        <view class="weui-cell__bd weui-cell_primary">
+                            <view style="font-size: 12px; color: #5a7590" data-isloadmoretap="true" bindtap='loadTickets'>
+                                查看更多
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <view class="weui-panel tourisms-panel">
+        <view class="weui-panel__hd" bindtap='toggleTourismModule'>☰ 结伴出行 </view>
+        <view class="weui-panel__bd" wx:if="{{tourisms.length > 0 && tourismsDisplay}}">
+            <view class="weui-media-box weui-media-box_small-appmsg">
+                <view class="weui-cells weui-cells_in-small-appmsg">
+                    <view wx:for="{{tourisms}}" wx:for-item="tourism">
+                        <navigator url="../../tourism/tourismDetail/tourismDetail?tourismId={{tourism.id}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                            <view class="weui-cell__bd weui-cell_primary">
+                                <view style="{{tourism.isDeleted ? 'color: gray !important;font-size: 13px;' : 'font-size: 13px;'}}">
+                                    {{tourism.title + (tourism.isDeleted?'【已删除】':'')}}
+                                </view>
+                                <view style="color: gray !important; font-size: 11px !important">{{'发布于：' + tourism.postDate + ' 收到回复：' + (tourism.replyCnt == null?'0':tourism.replyCnt) + '条'}}</view>
+                            </view>
+                            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                        </navigator>
+                    </view>
+                    <view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                        <view class="weui-cell__bd weui-cell_primary">
+                            <view style="font-size: 12px; color: #5a7590" data-isloadmoretap="true" bindtap='loadTourisms'>
+                                查看更多
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <view class="weui-panel questions-panel">
+        <view class="weui-panel__hd" bindtap='toggleQuestionModule'>☰ 提问</view>
+        <view class="weui-panel__bd" wx:if="{{questions.length > 0 && questionsDisplay}}">
+            <view class="weui-media-box weui-media-box_small-appmsg">
+                <view class="weui-cells weui-cells_in-small-appmsg">
+                    <view wx:for="{{questions}}" wx:for-item="question">
+                        <navigator url="../../question/questionDetail/questionDetail?questionId={{question.id}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                            <view class="weui-cell__bd weui-cell_primary">
+                                <view style="{{question.isDeleted ? 'color: gray !important;font-size: 13px;' : 'font-size: 13px;'}}">
+                                    {{question.title + (question.isDeleted?'【已删除】':'')}}
+                                </view>
+                                <view style="color: gray !important; font-size: 11px !important">{{'发布于：' + question.postDate + ' 收到回复：' + (question.replyCnt == null?'0':question.replyCnt) + '条'}}</view>
+                            </view>
+                            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                        </navigator>
+                    </view>
+                    <view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                        <view class="weui-cell__bd weui-cell_primary">
+                            <view style="font-size: 12px; color: #5a7590" data-isloadmoretap="true" bindtap='loadQuestions'>
+                                查看更多
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <view class="weui-panel customs-panel">
+        <view class="weui-panel__hd" bindtap='toggleCustomModule' wx:if="{{role == 'ADMIN'}}">☰ 独享服务</view>
+        <view class="weui-panel__bd" wx:if="{{customs.length > 0 && customsDisplay}}">
+            <view class="weui-media-box weui-media-box_small-appmsg">
+                <view class="weui-cells weui-cells_in-small-appmsg">
+                    <view wx:for="{{customs}}" wx:for-item="custom">
+                        <navigator url="../../custom/customDetail/customDetail?customId={{custom.id}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                            <view class="weui-cell__bd weui-cell_primary">
+                                <view style="{{custom.isDeleted ? 'color: gray !important;font-size: 13px;' : 'font-size: 13px;'}}">
+                                    {{custom.title + (custom.isDeleted?'【已删除】':'')}}
+                                </view>
+                                <view style="color: gray !important; font-size: 11px !important">{{'发布于：' + custom.postDate + ' 收到回复：' + (custom.replyCnt == null?'0':custom.replyCnt) + '条'}}</view>
+                            </view>
+                            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                        </navigator>
+                    </view>
+                    <view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                        <view class="weui-cell__bd weui-cell_primary">
+                            <view style="font-size: 12px; color: #5a7590" data-isloadmoretap="true" bindtap='loadCustoms'>
+                                查看更多
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+
+<!-- *******************TOPIC MODULE************************ -->
+<!-- *******************COMMENT MODULE************************ -->
+
+<view wx:if="{{commentDisplay}}" class="comment-view">
+    <view class="weui-panel admin-panel">
+        <view class="weui-panel__hd" bindtap="toggleCommentsSentModule">☰ 发出的评论</view>
+        <view class="weui-panel__bd" wx:if="{{commentsSent.length > 0 && commentsSentDisplay}}">
+            <view class="weui-media-box weui-media-box_small-appmsg">
+                <view class="weui-cells weui-cells_in-small-appmsg">
+                    <block wx:for="{{commentsSent}}" wx:for-item="comment">
+                        <navigator url="../../{{comment.subject}}/{{comment.subject + 'Detail'}}/{{comment.subject + 'Detail'}}?{{comment.subject + 'Id=' + comment.beRepliedTopicId}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                            <view class="weui-cell__bd weui-cell_primary" style="font-size: 13px">
+                                <text decode='{{true}}' style="{{comment.isDeleted ? 'color: gray !important' : ''}}">{{'你在【' + (comment.beRepliedTopicTitle ? comment.beRepliedTopicTitle : '') + '】评论了：' + comment.content + (comment.isDeleted?'【已删除】':'')}}</text>
+                                <!-- <text decode="{{true}}">
+                                    {{comment.content}}
+                                </text> -->
+                                <view style="color: gray !important; font-size: 11px !important">{{'发布于：' + comment.postDate}}</view>
+                            </view>
+                            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                        </navigator>
+                    </block>
+                    <view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                        <view class="weui-cell__bd weui-cell_primary">
+                            <view style="font-size: 12px; color: #5a7590" data-isloadmoretap="true" bindtap='loadCommentsSent'>
+                                查看更多
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="weui-panel">
+        <view class="weui-panel__hd" bindtap="toggleCommentsReceivedModule">☰ 收到的回复</view>
+        <view class="weui-panel__bd" wx:if="{{commentsReceived.length > 0 && commentsReceivedDisplay}}">
+            <view class="weui-media-box weui-media-box_small-appmsg">
+                <view class="weui-cells weui-cells_in-small-appmsg">
+                    <block wx:for="{{commentsReceived}}" wx:for-item="comment">
+                        <navigator url="../../{{comment.subject}}/{{comment.subject + 'Detail'}}/{{comment.subject + 'Detail'}}?{{comment.subject + 'Id=' + comment.beRepliedTopicId}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                            <view class="weui-cell__bd weui-cell_primary" style="font-size: 13px">
+                                <text decode='{{true}}' style="{{comment.isDeleted ? 'color: gray !important' : ''}}">{{comment.posterNickName + ' 在【' + (comment.beRepliedTopicTitle ? comment.beRepliedTopicTitle : '') + '】评论了你：' + (comment.isDeleted ? '【该评论内容已删除】' : comment.content)}}</text>
+                                <!-- <text decode="{{true}}">
+                                    {{comment.content}}
+                                </text> -->
+                                <view style="color: gray !important; font-size: 11px !important">{{'评论于：' + comment.postDate}}</view>
+                            </view>
+                            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                        </navigator>
+                    </block>
+                    <view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                        <view class="weui-cell__bd weui-cell_primary">
+                            <view style="font-size: 12px; color: #5a7590" data-isloadmoretap="true" bindtap='loadCommentsReceived'>
+                                查看更多
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+
+<!-- *******************COMMENT MODULE************************ -->
+<!-- *******************PRIVATE MESSAGE*********************** -->
+<view wx:if="{{privateMessageDisplay}}" class="private-msg-view">
+    <view class="weui-panel private-msg-panel">
+        <view class="weui-panel__hd" bindtap="toggleTourismSignUpSentMsgModule">☰ 已发出 · 结伴私信</view>
+        <view class="weui-panel__bd" wx:if="{{tourismSignUpSentMsgs.length > 0 && tourismSignUpSentMsgDisplay}}">
+            <view class="weui-media-box weui-media-box_small-appmsg">
+                <view class="weui-cells weui-cells_in-small-appmsg">
+                    <block wx:for="{{tourismSignUpSentMsgs}}" wx:for-item="msg">
+                        <navigator url="../msg/msg?index={{index}}&subject=TOURISM_SENT" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                            <view class="weui-cell__bd weui-cell_primary" style="font-size: 13px">
+                                <text decode='{{true}}'>{{'发给 ' + msg.receiverNickName + ' 的私信【' + msg.tourismTitle + '】：' + msg.msg}}</text>
+                                <view style="color: gray !important; font-size: 11px !important">{{'发送时间：' + msg.date}}</view>
+                            </view>
+                            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                        </navigator>
+                    </block>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="weui-panel private-msg-panel">
+        <view class="weui-panel__hd" bindtap="toggleTourismSignUpReceivedMsgModule">☰ 已收到 · 结伴私信</view>
+        <view class="weui-panel__bd" wx:if="{{tourismSignUpReceivedMsgs.length > 0 && tourismSignUpReceivedMsgDisplay}}">
+            <view class="weui-media-box weui-media-box_small-appmsg">
+                <view class="weui-cells weui-cells_in-small-appmsg">
+                    <block wx:for="{{tourismSignUpReceivedMsgs}}" wx:for-item="msg">
+                        <navigator url="../msg/msg?index={{index}}&subject=TOURISM_RECEIVED" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                            <view class="weui-cell__bd weui-cell_primary" style="font-size: 13px">
+                                <text decode='{{true}}'>{{'收到 ' + msg.sentorNickName + ' 的私信【' + msg.tourismTitle + '】：' + msg.msg}}</text>
+                                <view style="color: gray !important; font-size: 11px !important">{{'发送时间：' + msg.date}}</view>
+                            </view>
+                            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                        </navigator>
+                    </block>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <view class="weui-panel msg-to-admin-panel" wx:if="{{role != 'ADMIN'}}">
+        <view class="weui-panel__hd" bindtap="toggleAdminPrivMsgModule">☰ 已发出 · 管理员私信</view>
+        <view class="weui-panel__bd" wx:if="{{adminPrivMsgs.length > 0 && adminPrivMsgDisplay}}">
+            <view class="weui-media-box weui-media-box_small-appmsg">
+                <view class="weui-cells weui-cells_in-small-appmsg">
+                    <block wx:for="{{adminPrivMsgs}}" wx:for-item="msg">
+                        <navigator url="../msg/msg?index={{index}}&subject=PRIVADMIN_SENT&msgType={{msg.type}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                            <view class="weui-cell__bd weui-cell_primary" style="font-size: 13px">
+                                <text decode='{{true}}'>{{'【' + msg.type + '】' + msg.content}}</text>
+                                <view style="color: gray !important; font-size: 11px !important">{{'发送时间：' + msg.postDate}}</view>
+                            </view>
+                            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                        </navigator>
+                    </block>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <button class="weui-btn priv-btn" wx:if="{{role != 'ADMIN' && authorized == true}}" plain="true" bindtap="sendPrivMsgBtn">发私信给管理员</button>
+
+</view>
+<!-- *******************PRIVATE MESSAGE*********************** -->
+<!-- *******************ADMIN MODULE************************ -->
+
+<view wx:if="{{adminDisplay}}" class="admin-view">
+    <view class="weui-panel admin-panel">
+        <view class="weui-panel__hd">☰ 管理员</view>
+        <view class="weui-panel__bd">
+            <view class="weui-media-box weui-media-box_small-appmsg">
+                <view class="weui-cells weui-cells_in-small-appmsg">
+                    <navigator url="../admin/password/password" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                        <view class="weui-cell__bd weui-cell_primary" style="font-size: 13px">
+                            <view>更改管理员密码</view>
+                        </view>
+                        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                    </navigator>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="weui-panel">
+        <view class="weui-panel__hd">☰ 用户管理</view>
+        <view class="weui-panel__bd">
+            <view class="weui-media-box weui-media-box_small-appmsg">
+                <view class="weui-cells weui-cells_in-small-appmsg">
+                    <navigator url="../admin/permission/permission" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                        <view class="weui-cell__bd weui-cell_primary" style="font-size: 13px">
+                            <view>权限管理</view>
+                        </view>
+                        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                    </navigator>
+                    <navigator url="../admin/privMsg/privMsg" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                        <view class="weui-cell__bd weui-cell_primary" style="font-size: 13px">
+                            <view>用户私信</view>
+                        </view>
+                        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                    </navigator>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="weui-panel">
+        <view class="weui-panel__hd">☰ 帖子管理</view>
+        <view class="weui-panel__bd">
+            <view class="weui-media-box weui-media-box_small-appmsg">
+                <view class="weui-cells weui-cells_in-small-appmsg">
+                    <navigator url="../admin/deletedSubject/deletedSubject" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                        <view class="weui-cell__bd weui-cell_primary" style="font-size: 13px">
+                            <view>已删主题</view>
+                        </view>
+                        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                    </navigator>
+                    <navigator url="../admin/deletedMessage/deletedMessage" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                        <view class="weui-cell__bd weui-cell_primary" style="font-size: 13px">
+                            <view>已删评论</view>
+                        </view>
+                        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                    </navigator>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="weui-panel">
+        <view class="weui-panel__hd">☰ 独享资源报名</view>
+        <view class="weui-panel__bd">
+            <view class="weui-media-box weui-media-box_small-appmsg">
+                <view class="weui-cells weui-cells_in-small-appmsg">
+                    <navigator url="../admin/customSignUpMessage/customSignUpMessage" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                        <view class="weui-cell__bd weui-cell_primary" style="font-size: 13px">
+                            <view>报名信息</view>
+                        </view>
+                        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                    </navigator>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="weui-panel">
+        <view class="weui-panel__hd">☰ 公告管理</view>
+        <view class="weui-panel__bd">
+            <view class="weui-media-box weui-media-box_small-appmsg">
+                <view class="weui-cells weui-cells_in-small-appmsg">
+                    <navigator url="../admin/announcement/announcement" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                        <view class="weui-cell__bd weui-cell_primary" style="font-size: 13px">
+                            <view>发布公告</view>
+                        </view>
+                        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                    </navigator>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<!-- *******************ADMIN MODULE************************ -->

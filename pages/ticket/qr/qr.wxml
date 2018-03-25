@@ -1,0 +1,6 @@
+<!-- <view class="weui-toptips">截图扫码支付后，请回到此处并点击“我已付款”</view> -->
+<image style="margin-top: 30px;width: 100%; height: 100%; background-color: #eeeeee;" src="{{src}}" data-src="{{src}}" mode='aspectFit' bindtap='tapQR'></image>
+
+<view class="weui-btn-area" style="width: 80%">
+    <button class="weui-btn" type="primary" bindtap="copyWechatId">复制咖喱微信号</button>
+</view>

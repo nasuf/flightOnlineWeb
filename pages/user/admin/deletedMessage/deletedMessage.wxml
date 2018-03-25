@@ -1,0 +1,88 @@
+<view class="weui-panel">
+    <view class="weui-panel__hd" bindtap="toggleTicketMsgModule">☰ 机票信息</view>
+    <view class="weui-panel__bd" wx:if="{{ticketsMsg.length > 0 && ticketMsgModuleDisplay}}">
+        <view class="weui-media-box weui-media-box_small-appmsg">
+            <view class="weui-cells weui-cells_in-small-appmsg">
+                <view class="weui-cell weui-cell_switch" wx:for="{{ticketsMsg}}" wx:for-item="msg">
+                    <view bindtap='openActionSheet' data-id="{{msg.id}}" data-topicid="{{msg.beRepliedTopicId}}" data-subject="{{msg.subject}}" class="weui-cell__bd weui-cell_primary" style="font-size: 13px">
+                        <text decode='{{true}}'>{{msg.posterNickName + ' 在【' + (msg.beRepliedTopicTitle ? msg.beRepliedTopicTitle : '') + '】评论了：' + msg.content}}</text>
+                        <view style="color: gray !important; font-size: 11px !important">{{'评论于：' + msg.postDate}}</view>
+                    </view>
+                </view>
+                <view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                    <view class="weui-cell__bd weui-cell_primary">
+                        <view style="font-size: 12px; color: #5a7590" data-isloadmoretap="true" bindtap='loadTicketsMsg'>
+                            查看更多
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="weui-panel">
+    <view class="weui-panel__hd" bindtap="toggleTourismMsgModule">☰ 出行结伴</view>
+    <view class="weui-panel__bd" wx:if="{{tourismsMsg.length > 0 && tourismMsgModuleDisplay}}">
+        <view class="weui-media-box weui-media-box_small-appmsg">
+            <view class="weui-cells weui-cells_in-small-appmsg">
+                <view class="weui-cell weui-cell_switch" wx:for="{{tourismsMsg}}" wx:for-item="msg">
+                    <view bindtap='openActionSheet' data-id="{{msg.id}}" data-topicid="{{msg.beRepliedTopicId}}" data-subject="{{msg.subject}}" class="weui-cell__bd weui-cell_primary" style="font-size: 13px">
+                        <text decode='{{true}}'>{{msg.posterNickName + ' 在【' + (msg.beRepliedTopicTitle ? msg.beRepliedTopicTitle : '') + '】评论了：' + msg.content}}</text>
+                        <view style="color: gray !important; font-size: 11px !important">{{'评论于：' + msg.postDate}}</view>
+                    </view>
+                </view>
+                <view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                    <view class="weui-cell__bd weui-cell_primary">
+                        <view style="font-size: 12px; color: #5a7590" data-isloadmoretap="true" bindtap='loadTourismsMsg'>
+                            查看更多
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="weui-panel">
+    <view class="weui-panel__hd" bindtap="toggleQuestionMsgModule">☰ 提问</view>
+    <view class="weui-panel__bd" wx:if="{{questionsMsg.length > 0 && questionMsgModuleDisplay}}">
+        <view class="weui-media-box weui-media-box_small-appmsg">
+            <view class="weui-cells weui-cells_in-small-appmsg">
+                <view class="weui-cell weui-cell_switch" wx:for="{{questionsMsg}}" wx:for-item="msg">
+                    <view bindtap='openActionSheet' data-id="{{msg.id}}" data-topicid="{{msg.beRepliedTopicId}}" data-subject="{{msg.subject}}" class="weui-cell__bd weui-cell_primary" style="font-size: 13px">
+                        <text decode='{{true}}'>{{msg.posterNickName + ' 在【' + (msg.beRepliedTopicTitle ? msg.beRepliedTopicTitle : '') + '】评论了：' + msg.content}}</text>
+                        <view style="color: gray !important; font-size: 11px !important">{{'评论于：' + msg.postDate}}</view>
+                    </view>
+                </view>
+                <view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                    <view class="weui-cell__bd weui-cell_primary">
+                        <view style="font-size: 12px; color: #5a7590" data-isloadmoretap="true" bindtap='loadQuestionsMsg'>
+                            查看更多
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="weui-panel">
+    <view class="weui-panel__hd" bindtap="toggleCustomMsgModule">☰ 独享服务</view>
+    <view class="weui-panel__bd" wx:if="{{customsMsg.length > 0 && customMsgModuleDisplay}}">
+        <view class="weui-media-box weui-media-box_small-appmsg">
+            <view class="weui-cells weui-cells_in-small-appmsg">
+                <view class="weui-cell weui-cell_switch" wx:for="{{customsMsg}}" wx:for-item="msg">
+                    <view bindtap='openActionSheet' data-id="{{msg.id}}" data-topicid="{{msg.beRepliedTopicId}}" data-subject="{{msg.subject}}" class="weui-cell__bd weui-cell_primary" style="font-size: 13px">
+                        <text decode='{{true}}'>{{msg.posterNickName + ' 在【' + (msg.beRepliedTopicTitle ? msg.beRepliedTopicTitle : '') + '】评论了：' + msg.content}}</text>
+                        <view style="color: gray !important; font-size: 11px !important">{{'评论于：' + msg.postDate}}</view>
+                    </view>
+                </view>
+                <view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                    <view class="weui-cell__bd weui-cell_primary">
+                        <view style="font-size: 12px; color: #5a7590" data-isloadmoretap="true" bindtap='loadCustomsMsg'>
+                            查看更多
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

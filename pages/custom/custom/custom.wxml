@@ -1,0 +1,33 @@
+<view class="top-btn-view">
+    <button class="weui-btn type-btn" style="{{discountStyle}}" plain="true" data-type="DISCOUNT" bindtap="onTypeTap">长期优惠</button>
+    <button class="weui-btn type-btn" style="{{routeStyle}}" plain="true" data-type="ROUTE" bindtap="onTypeTap">小众路线</button>
+    <button class="weui-btn type-btn" style="{{resourceStyle}}" plain="true" data-type="RESOURCE" bindtap="onTypeTap">独享资源</button>
+</view>
+
+<scroll-view scroll-y style="height: {{role == 'ADMIN' ? '80%' : '90%' }}" bindscrolltolower="onReachBottom">
+    <view class="weui-panel">
+        <view wx:for="{{customs}}" wx:for-item="custom">
+            <view hover-class="weui-cell_active" class="weui-panel__bd" style="{{style}}" bindtap="onCheckDetail" data-customid="{{custom.id}}" wx:if="{{!custom.isDeleted && (((role == 'VIP' || role == 'ADMIN') && custom.type == 'RESOURCE') || (custom.type != 'RESOURCE'))}}">
+
+                <view class="custom-item weui-media-box weui-media-box_text">
+                    <!-- <view class="avatar-nickname-date">
+                        <image class="avatar" src="{{custom.posterAvatarUrl}}" background-size="cover"></image>
+                        <view class="weui-media-box__info__meta nickname-date">{{custom.posterNickName + ' '}}发布于：{{custom.postDate}}</view>
+                    </view> -->
+                    <view style='font-size:17px;word-wrap:break-word;overflow:hidden'>
+                        {{custom.type=='DISCOUNT'? '【' + custom.subType + '】' + custom.title : custom.title}}
+                    </view>
+                    <view class="weui-media-box__desc">
+                        <text class="text-content" decode="{{true}}">
+                        {{custom.content == null ? '' : custom.content}}
+                        </text>
+                    </view>
+                </view>
+            </view>
+
+        </view>
+
+    </view>
+</scroll-view>
+
+<button class="weui-btn publish-btn" type="primary" bindtap="onPublishTap" wx:if="{{role == 'ADMIN'}}">发布</button>

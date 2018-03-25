@@ -1,0 +1,71 @@
+/**index.wxss**/
+page {
+    background-color: black;
+}
+
+.swiper {
+    margin-bottom: 5px
+}
+/*  */
+.swiper-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 0 !important;
+}
+
+.weui-panel {
+    border: 0px;
+    width: 90%;
+    margin: 0 auto;
+    padding: 0
+}
+
+.navigator {
+    padding: 0px;
+    margin-bottom: 10px;
+}
+
+.container {
+    height: 75%;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0;
+    padding-bottom: 5%;
+    margin-top: 0px;
+    margin-bottom: 5%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    overflow: hidden;
+}
+
+
+
+.title {
+    font-size: 20px;
+    /* color: white; */
+}
+
+
+.weui-panel {
+    /* background-image: -webkit-linear-gradient(to left top, 	Lavender 2%, black 98%);
+    background-image: linear-gradient(to left top, Lavender 2%, black 98%); */
+    
+    border: 0px solid;
+    border-radius: 5px;
+}
+
+
+
+.weui-media-box_text {
+    border-left: 0px solid black
+} 
+
+.weui-flex {
+    border-bottom: 1px #ccc solid;
+}
+
+.last {
+    margin-bottom: 0px
+}

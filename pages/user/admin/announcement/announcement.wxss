@@ -1,0 +1,6 @@
+page{
+    background-color: #FFFFFF;
+}
+.content {
+    text-align: left;
+}

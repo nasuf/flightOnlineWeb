@@ -1,0 +1,70 @@
+<view class="page__bd">
+    <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopErrorTips}}">{{errorMsg}}</view>
+    <view class="weui-cells__title">基本信息</view>
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">标题</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input name="title" class="weui-input" placeholder="请输入标题" bindinput="inputChange" data-key="title" />
+            </view>
+        </view>
+        <view class="weui-cell weui-cell_select">
+            <view class="weui-cell__hd weui-cell__hd_in-select-after">
+                <view class="weui-label">类型</view>
+            </view>
+            <view class="weui-cell__bd">
+                <picker bindchange="bindTypeChange" value="{{typeIndex}}" range="{{types}}">
+                    <view class="weui-select weui-select_in-select-after">{{types[typeIndex]}}</view>
+                </picker>
+            </view>
+        </view>
+        <view class="weui-cell weui-cell_input" wx:if="{{typeIndex == 0}}">
+            <view class="weui-cell__hd">
+                <view class="weui-label">子类</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input name="subType" class="weui-input" placeholder="请输入子类" bindinput="inputChange" data-key="subType" />
+            </view>
+        </view>
+        <view class="weui-cell weui-cell_select" wx:if="{{typeIndex != 2}}">
+            <view class="weui-cell__hd weui-cell__hd_in-select-after">
+                <view class="weui-label">加入方式</view>
+            </view>
+            <view class="weui-cell__bd">
+                <picker bindchange="bindJoinTypeChange" value="{{joinTypeIndex}}" range="{{joinTypes}}">
+                    <view class="weui-select weui-select_in-select-after">{{joinTypes[joinTypeIndex]}}</view>
+                </picker>
+            </view>
+        </view>
+        <view wx:for="{{urlCounts}}" wx:for-item="{{urlCount}}">
+            <view class="weui-cell weui-cell_input" wx:if="{{joinTypeIndex == 1}}">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">链接{{index + 1}}</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" bindinput="urlInputChange" data-urlindex="{{index}}" placeholder="请输入链接{{index + 1}}" />
+                </view>
+                <view class="weui-cell__ft" bindtap="addMoreUrl">
+                    +
+                </view>
+                <!-- <view class="weui-cell__ft" data-urlindex="{{index}}" style='margin-left:10px' bindtap="removeUrl">
+                    ×
+                </view> -->
+            </view>
+        </view>
+    </view>
+
+    <view class="weui-cells__title">详情</view>
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell">
+            <view class="weui-cell__bd">
+                <textarea name="content" style="width: 100%" auto-height placeholder="请输入详情" bindinput="inputChange" data-key="content" maxlength='-1' />
+            </view>
+        </view>
+    </view>
+    <view class="weui-btn-area">
+        <button form-type="submit" class="weui-btn" type="primary" bindtap="publish">发布</button>
+    </view>
+</view>

@@ -1,0 +1,15 @@
+{
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#F5F5F5",
+    "navigationBarTitleText": "结伴详情",
+    "navigationBarTextStyle": "black",
+    "pages": [
+        "pages/index/index",
+        "pages/user/user",
+        "pages/logs/logs",
+        "pages/tickets/tickets",
+        "pages/adminLogin/adminLogin",
+        "pages/publish/publish",
+        "pages/ticketDetail/ticketDetail"
+    ]
+}

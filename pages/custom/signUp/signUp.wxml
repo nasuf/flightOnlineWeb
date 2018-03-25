@@ -1,0 +1,61 @@
+<view class="page__bd">
+    <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopErrorTips}}">{{errorMsg}}</view>
+    <view class="weui-cells__title">基本信息</view>
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">微信号</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input name="wechatId" class="weui-input" placeholder="请输入微信号" bindinput="inputChange" data-key="wechatId" />
+            </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">人数</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input type='number' name="count" class="weui-input" placeholder="请输入报名人数" bindinput="inputChange" data-key="count" />
+            </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">具体项目</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input name="item" class="weui-input" placeholder="请输入具体项目内容" bindinput="inputChange" data-key="item" />
+            </view>
+        </view>
+    </view>
+    <view class="weui-cells__title">日期</view>
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_switch">
+            <view class="weui-cell__bd">是否精确到日</view>
+            <view class="weui-cell__ft">
+                <switch name="departureDateAccuracy" bindchange="switchDepartureDateAccuracy" />
+            </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">出行日期</view>
+            </view>
+            <view class="weui-cell__bd">
+                <picker name="departureDateFrom" mode="date" value="{{customSignUpMessage.departureDate}}" start="2015-09-01" bindchange="bindDateChange" fields="{{accuracy}}" data-key="departureDate">
+                    <view class="weui-input" style="font-size:15px">{{customSignUpMessage.departureDate}}</view>
+                </picker>
+            </view>
+        </view>
+    </view>
+    <view class="weui-cells__title">详情</view>
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell">
+            <view class="weui-cell__bd">
+                <textarea name="content" style="width: 100%" auto-height placeholder="请输入详情" bindinput="inputChange" data-key="content" maxlength='-1' />
+            </view>
+        </view>
+    </view>
+    <view class="weui-cells__title" style='font-size:12px; color: gray !important'>报名后24小时内管理员将与您微信联系，请耐心等待哦</view>
+    <view class="weui-btn-area">
+        <button form-type="submit" class="weui-btn" type="primary" bindtap="publish">发送</button>
+    </view>
+</view>

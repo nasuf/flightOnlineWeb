@@ -1,0 +1,71 @@
+<view class="weui-panel">
+    <view class="weui-panel__bd" wx:if="{{isCustomLoaded}}">
+        <view class="weui-media-box weui-media-box_text ticket-detail">
+            <!-- <view class="weui-media-box__desc" style="margin-bottom: 15px">
+                <view class="topic-avatar-nickname">
+                    <image class="topic-avatar" src="{{custom.posterAvatarUrl}}" background-size="cover"></image>
+                    <view class="topic-info">
+                        {{custom.posterNickName + ' 发布于 ' + custom.postDate}}
+                    </view>
+                </view>
+            </view> -->
+            <view class="title-joinBtn">
+                <view style='font-size:17px;width:75%;word-wrap:break-word;overflow:hidden'>
+                    {{custom.title}}
+                </view>
+                <view style="width:25%">
+                    <button class="weui-btn joinBtn" bindtap='onJoinBtnTap' data-customid="{{custom.id}}"  data-jointype="{{custom.joinType}}" data-ctype="{{custom.type}}" plain="true" >{{custom.type == 'DISCOUNT' ? '我要省钱' :  ( isSignUp ? '已报名' : '我要报名')}}</button>
+                </view>
+            </view>
+
+            <text class="topic-content" decode="{{true}}" selectable='true'>
+                        {{custom.content == null ? '' : custom.content}}
+                        </text>
+            <view class="weui-media-box__info tourism-action">
+                <view class="action">
+                    <view class="weui-media-box__info__meta weui-media-box__info__meta_extra topic-comment" data-id="{{custom.id}}" data-subject="CUSTOM" data-msgtype="TOPIC" bindtap="onCommentAction">评论</view>
+                    <view class="weui-media-box__info__meta weui-media-box__info__meta_extra" wx:if="{{role == 'ADMIN'}}" data-subject="CUSTOM" data-msgtype="TOPIC" bindtap="onDeleteAction" data-id="{{custom.id}}">删除</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+
+<view class="weui-panel" wx:if="{{isRepliesLoaded}}">
+    <view wx:for="{{replies}}" wx:for-item="reply">
+        <view class="weui-panel__bd reply-panel">
+            <view class="reply-field weui-media-box weui-media-box_text">
+                <view class="avatar">
+                    <image bindtap="openActionSheet" class="avatar" src="{{reply.replyMessage.posterAvatarUrl}}" background-size="cover"></image>
+                </view>
+                <view class="reply-content">
+                    <view class="nickname-floor">
+                        <text class="nickname">{{reply.replyMessage.posterNickName}}</text>
+                        <text class="floor">{{'# ' + (index+1)}}</text>
+                    </view>
+                    <view class="weui-media-box__desc beRepliedContent">
+                        <text class="beReplied" wx:if="{{reply.replyMessage.beRepliedPoster}}" decode="{{true}}">
+                            {{reply.replyMessage.beRepliedPoster}} &nbsp;&nbsp;发表于:&nbsp;{{reply.replyMessage.beRepliedPostDate}} \n {{reply.repliedContent}}
+                        </text>
+                    </view>
+                    <view class="weui-media-box__desc content">
+                        <text class="desc" decode="{{true}}" maxlength='-1' selectable='true'>
+                            {{reply.replyMessage.content}}
+                        </text>
+                    </view>
+                    <view class="replypostdate-action">
+                        <view class="replypostdate">
+                            {{reply.replyMessage.formatedPostDate}}
+                        </view>
+                        <view class="action weui-media-box__info">
+                            <view class="weui-media-box__info__meta weui-media-box__info__meta_extra action-comment" style="{{reply.replyMessage.commentStyle}}" data-id="{{reply.replyMessage.id}}" data-subject="CUSTOM" data-msgtype="REPLY" data-content="{{reply.replyMessage.content}}" data-berepliedposter="{{reply.replyMessage.poster}}"
+                                data-postdate="{{reply.replyMessage.postDate}}" data-posternickname="{{reply.replyMessage.posterNickName}}" bindtap="onCommentAction">评论</view>
+
+                            <view class="weui-media-box__info__meta weui-media-box__info__meta_extra action-delete" wx:if="{{role == 'ADMIN' || openid == reply.replyMessage.poster}}" bindtap="onDeleteAction" data-subject="CUSTOM" data-msgtype="REPLY" data-id="{{reply.replyMessage.id}}">删除</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

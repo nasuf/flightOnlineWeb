@@ -1,0 +1,10 @@
+/* pages/user/admin/permission/permission.wxss */
+.searchbar-result{
+    width: 100%;
+    margin-top: 0;
+    font-size: 14px;
+}
+.searchbar-result:before{
+    width: 100%;
+    display: none;
+}

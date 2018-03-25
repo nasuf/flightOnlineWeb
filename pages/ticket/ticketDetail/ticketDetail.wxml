@@ -1,0 +1,85 @@
+<view class="weui-panel">
+    <!-- <web-view src="https://www.baidu.com"></web-view> -->
+    <view class="weui-panel__bd" wx:if="{{isTicketLoaded}}">
+        <view class="weui-media-box weui-media-box_text ticket-detail">
+            <view style='font-size:17px;word-wrap:break-word;overflow:hidden'>
+                    {{'【' + ticket.tag + '】' + ticket.title}}(￥{{ticket.price}})
+            </view>
+            <view class="weui-media-box__desc">
+                <text class="info" decode="{{true}}">
+                        {{'✈ 航线：' + ticket.departureCity}} {{ticket.isSingleFlight == true ? '&nbsp; ➝' : '&nbsp; ⇄'}}{{ticket.isTurning == true ? '&nbsp; '+ticket.turningCity : ''}} {{ticket.isTurning == true ?   (ticket.isSingleFlight == true ? '&nbsp; ➝' : '&nbsp; ⇄') : ''}} &nbsp;{{ticket.arrivalCity}} &nbsp; &nbsp; &nbsp;  
+                        </text>
+                <text class="info" decode="{{true}}">
+                    {{'✈ 时间：' + ticket.departureDateFrom}} {{ticket.departureDateTo ? ' ~ ' + ticket.departureDateTo : ''}}
+                </text>
+                <text class='info' decode='{{true}}'>
+                    {{'✈ 航空公司：' + ticket.airline }}
+                </text>
+            </view>
+            <text class="topic-content" decode="{{true}}" selectable='true'>
+                    {{ticket.info == null ? '' : ticket.info}}
+            </text>
+            <view class="weui-media-box__info ticket-action">
+                <view class="weui-media-box__info__meta weui-media-box__info__meta_extra topic-comment" data-id="{{ticket.id}}" data-subject="TICKET" data-msgtype="TOPIC" bindtap="onComment">评论</view>
+                <view class="weui-media-box__info__meta weui-media-box__info__meta_extra" wx:if="{{role == 'ADMIN'}}" data-subject="TICKET" data-msgtype="TOPIC" bindtap="onDeleteAction" data-id="{{ticket.id}}">删除</view>
+            </view>
+        </view>
+    </view>
+</view>
+
+<view class="weui-panel" wx:if="{{isRepliesLoaded}}">
+    <view wx:for="{{replies}}" wx:for-item="reply">
+        <view class="weui-panel__bd reply-panel">
+            <view class="reply-field weui-media-box weui-media-box_text">
+                <view class="avatar">
+                    <image class="avatar" src="{{reply.replyMessage.posterAvatarUrl}}" background-size="cover"></image>
+                </view>
+                <view class="reply-content">
+                    <view class="nickname-floor">
+                        <text class="nickname">{{reply.replyMessage.posterNickName}}</text>
+                        <text class="floor">{{'# ' + (index+1)}}</text>
+                    </view>
+                    <view class="weui-media-box__desc beRepliedContent">
+                        <text class="beReplied" wx:if="{{reply.replyMessage.beRepliedPoster}}" decode="{{true}}">
+                            {{reply.replyMessage.beRepliedPoster}} &nbsp;&nbsp;发表于:&nbsp;{{reply.replyMessage.beRepliedPostDate}} \n {{reply.repliedContent}}
+                        </text>
+                    </view>
+                    <view class="weui-media-box__desc content">
+                        <text class="desc" decode="{{true}}" maxlength='-1' selectable='true'>
+                            {{reply.replyMessage.content}}
+                        </text>
+                    </view>
+                    <view class="replypostdate-action">
+                        <view class="replypostdate">
+                            {{reply.replyMessage.formatedPostDate}}
+                        </view>
+                        <view class="action weui-media-box__info">
+                            <view class="weui-media-box__info__meta weui-media-box__info__meta_extra action-comment" 
+style="{{reply.replyMessage.commentStyle}}" data-id="{{reply.replyMessage.id}}" data-subject="TICKET" data-msgtype="REPLY" data-content="{{reply.replyMessage.content}}" data-berepliedposter="{{reply.replyMessage.poster}}"
+                                data-postdate="{{reply.replyMessage.postDate}}" 
+                                data-posternickname="{{reply.replyMessage.posterNickName}}"bindtap="onComment">评论</view>
+                            <view class="weui-media-box__info__meta weui-media-box__info__meta_extra action-delete" wx:if="{{role == 'ADMIN' || (role == 'VIP' && openid == reply.replyMessage.poster)}}" bindtap="onDeleteAction" data-subject="TICKET" data-msgtype="REPLY" data-id="{{reply.replyMessage.id}}">删除</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<!-- <view class="weui-panel">
+    <view class="weui-panel__bd">
+        <view class="weui-panel__hd">评论</view>
+        <view wx:for="{{replies}}" wx:for-item="reply">
+            <view class="weui-media-box weui-media-box_text">
+                <view class="weui-media-box__desc">
+                    <text class="desc" decode="{{true}}">
+                    {{reply.content}} 
+                </text>
+                </view>
+                <view class="weui-media-box__info">
+                    <view class="weui-media-box__info__meta weui-media-box__info__meta_extra" data-id="{{reply.id}}" bindtap="onComment">评论</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view> -->

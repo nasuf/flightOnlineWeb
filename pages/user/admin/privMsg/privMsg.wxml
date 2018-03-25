@@ -1,0 +1,44 @@
+<view class="weui-panel questions-panel">
+    <view class="weui-panel__hd" bindtap="togglePrivModule">☰ 用户私信</view>
+    <view class="weui-panel__bd" wx:if="{{msgs.length > 0 && privMsgModuleDisplay}}">
+        <view class="weui-media-box weui-media-box_small-appmsg">
+            <view class="weui-cells weui-cells_in-small-appmsg">
+                <view wx:for="{{msgs}}" wx:for-item="msg">
+                    <navigator url="../../msg/msg?index={{index}}&subject=PRIVADMIN_RECEIVED" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                        <view class="weui-cell__bd weui-cell_primary">
+                            <view style='font-size: 13px;'>
+                                {{'【' + msg.type + '】' + msg.content}}
+                            </view>
+                            <view style="color: gray !important; font-size: 11px !important">{{'发送于：' + msg.postDate}}</view>
+                        </view>
+                        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                    </navigator>
+                </view>
+                <view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                    <view class="weui-cell__bd weui-cell_primary">
+                        <view style="font-size: 12px; color: #5a7590" data-isloadmoretap="true" bindtap='loadPrivMsgs'>
+                            查看更多
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="weui-panel__hd" bindtap='toggleOldMemberModule'>☰ 老群员入群请求</view>
+    <view class="weui-panel__bd" wx:if="{{oldMembers.length > 0 && oldMemberModuleDisplay}}">
+        <view class="weui-media-box weui-media-box_small-appmsg">
+            <view class="weui-cells weui-cells_in-small-appmsg">
+                <view class="weui-cell weui-cell_switch" wx:for="{{oldMembers}}" wx:for-item="member">
+                    <view class="weui-cell__bd" bindtap="openActionSheet" data-openid="{{member.openid}}" data-nickname="{{member.nickName}}" style="font-size: 13px">{{member.nickName + '(微信号：' + member.wechatId + ')'}}</view>
+                </view>
+                <view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                    <view class="weui-cell__bd weui-cell_primary">
+                        <view style="font-size: 12px; color: #5a7590" data-isloadmoretap="true" bindtap='loadUnVipedOldMembers'>
+                            查看更多
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

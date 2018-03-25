@@ -1,0 +1,27 @@
+<view class="weui-panel questions-panel">
+    <view class="weui-panel__hd">☰ 用户私信</view>
+    <view class="weui-panel__bd" wx:if="{{msgs.length > 0}}">
+        <view class="weui-media-box weui-media-box_small-appmsg">
+            <view class="weui-cells weui-cells_in-small-appmsg">
+                <view wx:for="{{msgs}}" wx:for-item="msg">
+                    <navigator url="../../msg/msg?index={{index}}&subject=CUSTOM_SIGNUP_MSG" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                        <view class="weui-cell__bd weui-cell_primary">
+                            <view style='font-size: 13px;'>
+                                {{msg.nickName + ' 报名【' + msg.title + '】：' + msg.content}}
+                            </view>
+                            <view style="color: gray !important; font-size: 11px !important">{{'报名于：' + msg.signUpDate}}</view>
+                        </view>
+                        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                    </navigator>
+                </view>
+                <view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                    <view class="weui-cell__bd weui-cell_primary">
+                        <view style="font-size: 12px; color: #5a7590" data-isloadmoretap="true" bindtap='loadMessages'>
+                            查看更多
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

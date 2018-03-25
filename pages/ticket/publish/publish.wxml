@@ -1,0 +1,134 @@
+<view class="page__bd">
+    <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopErrorTips}}">{{errorMsg}}</view>
+    <view class="weui-cells__title">基本信息</view>
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">标题</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input name="title" class="weui-input" placeholder="请输入标题" bindinput="inputChange" data-key="title" />
+            </view>
+        </view>
+        <view class="weui-cell weui-cell_switch">
+            <view class="weui-cell__bd">是否单程</view>
+            <view class="weui-cell__ft">
+                <switch name="isSingleFlight" checked bindchange="switchChange" />
+            </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">航空公司</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input name="airline" class="weui-input" placeholder="请输入航空公司" bindinput="inputChange" data-key="airline" />
+            </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">价格</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input name="price" class="weui-input" placeholder="请输入机票价格" bindinput="inputChange" data-key="price" />
+            </view>
+        </view>
+    </view>
+    <view class="weui-cells__title">标签</view>
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_select">
+            <view class="weui-cell__hd" style="width: 105px">
+                <picker name="tag" bindchange="bindTagChange" value="{{tagIndex}}" range="{{tag}}">
+                    <view class="weui-select">{{tag[tagIndex]}}</view>
+                </picker>
+            </view>
+            <view class="weui-cell__bd weui-cell__bd_in-select-before">
+                <input name="tag" bindinput="inputChange" data-key="tag" class="weui-input" placeholder="{{otherTagPlaceHolder}}" disabled="{{isNotOtherTag}}" />
+            </view>
+        </view>
+    </view>
+    <view class="weui-cells__title">出发</view>
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_switch">
+            <view class="weui-cell__bd">是否精确到日</view>
+            <view class="weui-cell__ft">
+                <switch name="departureDateAccuracy" bindchange="switchDepartureDateAccuracy" />
+            </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">日期 从</view>
+            </view>
+            <view class="weui-cell__bd">
+                <picker name="departureDateFrom" mode="date" value="{{ticket.departureDateFrom}}" start="{{dateRangeStart}}" bindchange="bindDateChange" fields="{{accuracy}}" data-key="departureDateFrom">
+                    <view class="weui-input" style="font-size:15px">{{ticket.departureDateFrom}}</view>
+                </picker>
+            </view>
+            <view class="weui-cell__hd">
+                <view class="weui-label">至</view>
+            </view>
+            <view class="weui-cell__bd">
+                <picker name="departureDateTo" mode="date" value="{{ticket.departureDateTo}}" start="{{dateRangeEnd}}" bindchange="bindDateChange" fields="{{accuracy}}" data-key="departureDateTo">
+                    <view class="weui-input" style="font-size:15px">{{ticket.departureDateTo}}</view>
+                </picker>
+            </view>
+        </view>
+
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">国家</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input name="departureCountry" class="weui-input" bindinput="inputChange" data-key="departureCountry" />
+            </view>
+            <view class="weui-cell__hd">
+                <view class="weui-label">城市</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input name="departureCity" class="weui-input" bindinput="inputChange" data-key="departureCity" />
+            </view>
+        </view>
+    </view>
+    <view class="weui-cells__title">到达</view>
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">国家</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input name="arrivalCountry" class="weui-input" bindinput="inputChange" data-key="arrivalCountry" />
+            </view>
+            <view class="weui-cell__hd">
+                <view name="arrivalCity" class="weui-label">城市</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input class="weui-input" bindinput="inputChange" data-key="arrivalCity" />
+            </view>
+        </view>
+    </view>
+    <view class="weui-cells__title">是否转机</view>
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_select">
+            <view class="weui-cell__hd" style="width: 105px">
+                <picker name="isTurning" bindchange="bindFlightTypeChange" value="{{flightTypeIndex}}" range="{{flightType}}">
+                    <view class="weui-select">{{flightType[flightTypeIndex]}}</view>
+                </picker>
+            </view>
+            <view class="weui-cell__bd weui-cell__bd_in-select-before">
+                <input name="turningCity" bindinput="inputChange" data-key="turningCity" class="weui-input" placeholder="{{unSingleFlightPlaceholder}}" disabled="{{isSingleFlightInputDisabled}}" value="{{ticket.turningCity}}" />
+            </view>
+        </view>
+    </view>
+    <view class="weui-cells__title"></view>
+
+    <view class="weui-cells__title">目的地介绍</view>
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell">
+            <view class="weui-cell__bd">
+                <textarea name="info" style="width: 100%" auto-height placeholder="请输入目的地信息" bindinput="inputChange" data-key="info" maxlength='-1' />
+            </view>
+        </view>
+    </view>
+    <view class="weui-btn-area">
+        <button form-type="submit" class="weui-btn" type="primary" bindtap="publishTicket">发布</button>
+    </view>
+</view>

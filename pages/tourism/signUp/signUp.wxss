@@ -1,0 +1,7 @@
+page{
+    background-color: #FFFFFF;
+}
+
+.personalMsg {
+    text-align: left;
+}

@@ -1,0 +1,37 @@
+<view class="page">
+    <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopErrorTips}}">{{errorMsg}}</view>
+    <view class="weui-msg">
+        <!-- <view class="weui-msg__icon-area">
+            <icon type="success" size="93"></icon>
+        </view> -->
+        <view class="weui-msg__text-area">
+            <view class="weui-msg__title" style="margin-bottom: 20rpx">请输入微信号</view>
+            <view class="weui-msg__desc">等待活动发起人审核</view>
+            <view class="weui-cells weui-cells_after-title">
+                <view class="weui-cell weui-cell_input">
+                    <view class="weui-cell__bd">
+                        <input class="weui-input" bindinput="wechatIdInput">{{wechatId}}</input>
+                    </view>
+                </view>
+            </view>
+            <view class="weui-msg__title" style="margin-top: 30rpx">私信给行程发起人</view>
+            <view class="weui-cells weui-cells_after-title">
+                <view class="weui-cell weui-cell_input">
+                    <view class="weui-cell__bd">
+                        <!-- <input class="weui-input" maxlength='-1' bindinput="personalMsgInput">{{personalMsg}}</input> -->
+                        <textarea class="personalMsg" style="width: 100%; height: 80px"   bindinput="personalMsgInput"  maxlength='-1' value="{{personalMsg}}"/>
+                    </view>
+                    
+                </view>
+            </view>
+        </view>
+
+
+        <view class="weui-msg__opr-area">
+            <view class="weui-btn-area">
+                <button class="weui-btn" type="primary" bindtap="confirm">确认</button>
+                <button class="weui-btn" type="default" bindtap="cancel">取消</button>
+            </view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,74 @@
+<swiper class="swiper" indicator-dots="{{false}}" style="margin:0 auto; width: 100%; height: {{swiperHeight}}px" circular="{{true}}" indicator-dots="{{true}}" indicator-color="white"
+  autoplay="{{true}}" interval="{{5000}}" duration="{{500}}" bindchange="swiperChange">
+  <block wx:for="{{imgUrls}}">
+    <swiper-item class="swiper-item">
+      <image mode="widthFix" src="{{item}}" class="slide-image" bindload="imageLoad" style="width: {{imgWidth}}px; border-radius: 5px"/>
+    </swiper-item>
+  </block>
+</swiper>
+<view class="container">
+    <view class="weui-panel weui-panel_access">
+
+        <view class="weui-panel__bd page__bd_spacing">
+            <view class="weui-flex">
+                <view class="weui-flex__item">
+                    <view class="weui-media-box weui-media-box_text" bindtap='navigate' data-subject='ticket' hover-class="weui-cell_active">
+                        <!-- <view class="weui-media-box__title weui-media-box__title_in-text">标题一</view> -->
+                        <view class="weui-cell weui-cell_access navigator" >
+                            <view class="weui-cell__bd title" style="font-weight:bolder">机票信息汇总</view>
+                            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                        </view>
+                        <view class="weui-media-box__desc">每日特价机票，羊毛bug，OTA活动，航空公司大促等第一时间更新汇总，教你怎么省钱</view>
+                    </view>
+                </view>
+            </view>
+
+            <view class="weui-flex">
+                <view class="weui-flex__item">
+                    <view class="weui-media-box weui-media-box_text" bindtap='navigate' data-subject='tourism' hover-class="weui-cell_active">
+                        <!-- <view class="weui-media-box__title weui-media-box__title_in-text">标题一</view> -->
+                        <view class="weui-cell weui-cell_access navigator" >
+                            <view class="weui-cell__bd title" style="font-weight:bolder">出行结伴</view>
+                            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                        </view>
+                        <view class="weui-media-box__desc">发布旅途，加入旅程，最简洁高效地找到小伙伴一起出行</view>
+                    </view>
+                </view>
+            </view>
+
+            <view class="weui-flex">
+                <view class="weui-flex__item">
+                    <view class="weui-media-box weui-media-box_text" bindtap='navigate' data-subject='question' hover-class="weui-cell_active">
+                        <!-- <view class="weui-media-box__title weui-media-box__title_in-text">标题一</view> -->
+                        <view class="weui-cell weui-cell_access navigator" >
+                            <view class="weui-cell__bd title" style="font-weight:bolder">旅行互动</view>
+                            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                        </view>
+                        <view class="weui-media-box__desc">一切你不知道的，想要了解的旅行知识和小tips，都可以在这里找到答案。</view>
+                    </view>
+                </view>
+            </view>
+
+            <view class="weui-flex last">
+                <view class="weui-flex__item">
+                    <view class="weui-media-box weui-media-box_text" bindtap='navigate' data-subject='custom' hover-class="weui-cell_active">
+                        <!-- <view class="weui-media-box__title weui-media-box__title_in-text">标题一</view> -->
+                        <view class="weui-cell weui-cell_access navigator" >
+                            <view class="weui-cell__bd title" style="font-weight:bolder">独享服务</view>
+                            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                        </view>
+                        <view class="weui-media-box__desc">长期Booking，Airbnb等返现优惠，最全的保险，小众路线推荐，东南亚潜水等体验独家折扣</view>
+                    </view>
+                </view>
+            </view>
+
+        </view>
+        <!-- <view class="weui-panel__ft">
+        <view class="weui-cell weui-cell_access weui-cell_link">
+          <view class="weui-cell__bd">查看更多</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </view>
+      </view> -->
+    </view>
+
+</view>

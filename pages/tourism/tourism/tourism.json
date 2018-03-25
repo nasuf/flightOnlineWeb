@@ -1,0 +1,7 @@
+{
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#F5F5F5",
+    "navigationBarTitleText": "出行结伴",
+    "navigationBarTextStyle": "black",
+    "enablePullDownRefresh": true
+}
