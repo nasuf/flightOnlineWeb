@@ -131,7 +131,7 @@ Page({
         nickName = (nickName && nickName.length <= 5) ? nickName : nickName.substr(0, 6) + '...';
         var value = e.detail.value;
         wx.showActionSheet({
-            itemList: ['授予【'+nickName+'】VIP会员权限'],
+            itemList: ['授予VIP会员权限'],
             success: function (res) {
                 if (!res.cancel) {
                     wx.showModal({

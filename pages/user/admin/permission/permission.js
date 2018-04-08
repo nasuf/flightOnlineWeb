@@ -122,7 +122,7 @@ Page({
         var value = e.detail.value;
         var currentRole = e.currentTarget.dataset.currentrole;
         wx.showActionSheet({
-            itemList: currentRole == 'USER' ? ['授予【'+nickName+'】VIP会员权限'] : ['取消【'+nickName+'】VIP会员权限'],
+            itemList: currentRole == 'USER' ? ['授予VIP会员权限'] : ['取消VIP会员权限'],
             success: function (res) {
                 if (!res.cancel) {
                     wx.showModal({
